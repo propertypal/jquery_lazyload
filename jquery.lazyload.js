@@ -12,8 +12,23 @@
  * Version:  1.9.5
  *
  */
+ 
+// PropertyPal
+// Updated to add AMD module support
 
-(function($, window, document, undefined) {
+(function (factory) {
+	if (typeof define === 'function' && define.amd) {
+		// AMD
+		define(['jquery'], factory);
+	} else if (typeof exports === 'object') {
+		// CommonJS
+		factory(require('jquery'));
+	} else {
+		// Browser globals
+		factory(jQuery);
+	}
+}(function ($) {
+
     var $window = $(window);
 
     $.fn.lazyload = function(options) {
@@ -239,4 +254,4 @@
         "left-of-fold"   : function(a) { return !$.rightoffold(a, {threshold : 0}); }
     });
 
-})(jQuery, window, document);
+}));
